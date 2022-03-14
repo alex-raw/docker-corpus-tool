@@ -1,4 +1,4 @@
-FROM ubuntu:bionic as builder
+FROM ubuntu:impish as builder
 
 # Install cwb dependencies
 RUN apt-get update && \
@@ -15,7 +15,7 @@ RUN apt-get update && \
     libncurses5 \
     libncurses5-dev \
     libpcre3-dev \
-    libreadline7 \
+    libreadline8 \
     libreadline-dev \
     make \
     pkg-config \
@@ -33,7 +33,7 @@ RUN mv /usr/local/cwb-* /usr/local/cwb
 ###########################################
 # Actual Image without build dependencies #
 ###########################################
-FROM ubuntu:bionic
+FROM ubuntu:impish
 
 # Install dependency libraries
 RUN apt-get update && \
@@ -43,6 +43,7 @@ RUN apt-get update && \
     flex \
     libglib2.0-0 \
     readline-common \
+    libreadline8 \
     && rm -rf /var/lib/apt/lists/*
 
 # Add new binaries to PATH
